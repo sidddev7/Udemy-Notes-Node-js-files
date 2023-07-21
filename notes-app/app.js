@@ -39,6 +39,7 @@
 const yargs = require("yargs");
 const fs = require("fs");
 const { default: chalk } = require("chalk");
+const { addNotes, removeNote } = require("./notes");
 // change the versio of yargs
 // yargs.version("1.5.6");
 // console.log(yargs.argv);
@@ -58,21 +59,22 @@ yargs.command({
     },
   },
   handler: (args) => {
-    fs.appendFile(
-      "./1.json",
-      `${JSON.stringify({ title: args.title, body: args.body })}`,
-      () => {
-        console.log("Write note successful");
-      }
-    );
+    const res = addNotes(args.title, args.body)
   },
 }).argv;
 
 yargs.command({
   command: "remove",
   describe: "Remove the note",
+  builder: {
+    title: {
+      describe: "Enter the title of note you want to delete",
+      demandOption: true,
+      type: "string"
+    }
+  },
   handler: (args) => {
-    console.log("Removing", args);
+    removeNote(args.title)
   },
 }).argv;
 
