@@ -39,7 +39,7 @@
 const yargs = require("yargs");
 const fs = require("fs");
 const { default: chalk } = require("chalk");
-const { addNotes, removeNote, updateNote } = require("./notes");
+const { addNotes, removeNote, updateNote, readByTitle } = require("./notes");
 // change the versio of yargs
 // yargs.version("1.5.6");
 // console.log(yargs.argv);
@@ -115,3 +115,18 @@ yargs.command({
     });
   },
 }).argv;
+
+yargs.command({
+  command: "read",
+  describe: "Read a particular note",
+  builder: {
+    title: {
+      describe: "Enter the title of note you want to update",
+      demandOption: true,
+      type: "string"
+    },
+  },
+  handler: (args) => {
+    readByTitle(args.title)
+  }
+}).argv

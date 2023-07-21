@@ -52,4 +52,13 @@ const updateNote = (oldTitle, newNote) => {
     return console.log(chalk.red("No notes found with this title"))
   }
 }
-module.exports = { getNotes, addNotes, removeNote, updateNote };
+const readByTitle = (title) => {
+  const notes = loadNotes()
+  const note = notes.find(item => item.title === title)
+  if (note) {
+    console.log(note)
+  } else {
+    console.log(chalk.red("No Notes found"))
+  }
+}
+module.exports = { getNotes, addNotes, removeNote, updateNote, readByTitle };
