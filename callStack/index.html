@@ -1,0 +1,39 @@
+<html>
+  <body>
+    <button id="kill">Kill main thread</button>
+    <h3>
+      This button will kill the main thread, as it is a recursive function,
+      which executes directly on the call stack, and the call stack gets filled
+      infinitly
+    </h3>
+    <h3>
+      The timeout function will not kill the responsiveness of the webpage, as
+      the callback queue will only execute once the call stack is empty
+    </h3>
+    <button id="timeout">Call using setTimeout</button>
+  </body>
+  <script>
+    function callLoop() {
+      console.log("Called while killing the main thread process");
+      callLoop();
+    }
+    function timeOutFunction(i) {
+      console.log("Called timeout, without kiling the page");
+      //   setTimeout(() => timeOutFunction(i + 1), 0);
+      fetch("http://localhost:5000", { method: "GET" })
+        .then((res) => {
+          res.json().then((data) => {
+            timeOutFunction(i + 1);
+          });
+        })
+        .catch((err) => {
+          timeOutFunction(i + 1);
+        });
+    }
+    const btn = document.getElementById("kill");
+    btn?.addEventListener("click", () => callLoop(0), false);
+    document
+      .getElementById("timeout")
+      .addEventListener("click", () => timeOutFunction(0), false);
+  </script>
+</html>
