@@ -10,3 +10,10 @@
 - [Image 3](https://prnt.sc/Rs20BYHM-SAQ)
 
 - [Stream types](https://prnt.sc/BiYpHmxR8hSS)
+
+- 4 types of Streams are present
+
+- Readable stream
+- Writable stream
+- Duplex stream
+- Transform stream

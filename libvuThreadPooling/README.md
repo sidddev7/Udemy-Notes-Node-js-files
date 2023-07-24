@@ -45,3 +45,23 @@ Timetaken for 3 336
 - [Image 1](https://prnt.sc/jWL_UrUkLnvL)
 
 - [Image 2](https://prnt.sc/4jlciUvp9BnH)
+
+Running http request does not use thread pools
+### Only CPU intensive or I/O operations use the thread pools of LibUV
+
+- http request is a network I/O operation and not a CPU bound operation
+- it does not use thread pools, libUV sends the network request to OS kernel to execute the network request
+
+### Conclusion
+
+- In Nodejs, Async task are handled by LibUV
+
+- Two ways
+
+1. native Async mechanism  
+2. Thread pools
+
+- LibUV prefers the use of Native async mechanism whenever possible, in this case the, libUV sends the network request to OS kernel to execute the network request
+
+- if there is no native support for that async task, then the task is CPU bound task, libUV uses the thread pool to avoid blocking in Nodejs
+
