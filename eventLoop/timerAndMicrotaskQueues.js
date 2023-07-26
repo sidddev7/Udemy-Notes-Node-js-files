@@ -12,9 +12,14 @@
 // });
 // console.log("Called 2");
 
-setTimeout(()=>console.log("Called 1"),0)
-setTimeout(()=>console.log("Called 2"),0)
-setTimeout(()=>console.log("Called 3"),0)
+setTimeout(() => console.log("Called 1"), 0);
+setTimeout(() => console.log("Called 2"), 0);
+setTimeout(() => {
+  process.nextTick(() => {
+    console.log("next tick inside setTimeout");
+  });
+}, 0);
+setTimeout(() => console.log("Called 3"), 0);
 process.nextTick(() => console.log("Called next tick 1"));
 process.nextTick(() => {
   console.log("Called next tick 2");
