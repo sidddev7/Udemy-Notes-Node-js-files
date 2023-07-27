@@ -4,8 +4,10 @@ fs.readFile("../streams/stream.txt", (err, data) => {
   console.log("Console of read file", data.toString());
   setImmediate(() => {
     console.log("Called immediate");
+    process.nextTick(() => {
+      console.log("Next tick inside the setImmediate");
+    });
   });
-  console.log(process.memoryUsage().heapTotal);
 });
 setTimeout(() => {
   console.log("Settimeout 0");
