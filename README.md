@@ -125,3 +125,14 @@ Some conclusions: -
 - Only when the Call stack is Empty, the event loop comes into picture to run the callbacks
 - Settimeout and setinterval are given the priority
 - Timer callbacks are given the priority then the I/O operations
+
+- Callbacks in microtask queue are executed in between execution of timer queue callbacks
+
+
+## Important
+
+- The order of execution for a IO queue and setTimeout of 0 can never be guarenteed
+
+- ### I/O queue
+
+- I/O events are polled and the callbacks are added only when the I/O is complete

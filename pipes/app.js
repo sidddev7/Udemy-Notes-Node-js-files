@@ -8,6 +8,7 @@ const readableStream = fs.createReadStream("../streams/stream.txt", {
 });
 
 const writableStream = fs.createWriteStream("./pipe.txt", "utf-8");
-
+const gzipWriteStream = fs.createWriteStream("./pipe.gz");
 readableStream.pipe(writableStream);
-readableStream.pipe(gzip).pipe(fs.WriteStream("./pipe.gz"));
+console.log(readableStream);
+readableStream.pipe(gzip).pipe(gzipWriteStream);
