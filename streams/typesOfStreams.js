@@ -25,8 +25,5 @@ server.on("request", (req, res) => {
   //   });
 
   //   This is streaming that happens from server to the client on browser side
-  readableStream.on("data", (chunk) => {
-    res.write(chunk);
-    res.end()
-  });
+  readableStream.pipe(res);
 });
