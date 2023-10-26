@@ -1,1 +1,8 @@
-{"title":"Sneh Desai","description":"The best Book","name":"Siddhrajsinh Gohil","age":23,"livesIn":"Surat","position":"Developer"}
+{
+    "title": "Sneh Desai",
+    "description": "The best Book",
+    "name": "Siddhrajsinh Gohil",
+    "age": 23,
+    "livesIn": "Surat",
+    "position": "Developer"
+}
