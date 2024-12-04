@@ -1,3 +1,6 @@
+const { pipeline } = require("stream/promises");
+const fs = require("fs");
+
 const promise1 = Promise.reject(3);
 const promise2 = new Promise((resolve, reject) => {
   setTimeout(reject, 100, "foo");
@@ -80,3 +83,26 @@ const additiona = (...abc) => {
   console.log(abc);
 };
 additiona(...[1, 2, 4]);
+
+// currying
+
+function add(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+
+const add5 = add(5);
+console.log(add5());
+
+async function run() {
+  await pipeline(
+    fs.createReadStream("./test.txt"),
+    fs.createWriteStream("./test2.txt", {
+      encoding: "utf-8",
+      highWaterMark: 2,
+    })
+  );
+}
+
+run().catch(console.error);
